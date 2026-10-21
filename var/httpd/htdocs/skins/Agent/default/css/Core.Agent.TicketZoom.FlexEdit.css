@@ -1,0 +1,384 @@
+/*
+Copyright (C) 2012 Znuny GmbH, https://znuny.com/
+
+This software comes with ABSOLUTELY NO WARRANTY. For details, see
+the enclosed file COPYING for license information (AGPL). If you
+did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+*/
+
+@media screen,projection,tv,handheld {
+
+    /*
+     * Skin orange is --primary-color (#FF8A25 in the default skin).
+     * Ivory is not shipped. The dark skin inverts the page, so this variable follows.
+     */
+    .FlexEditSidebarWidget {
+        --flexedit-accent: var(--primary-color);
+    }
+
+    .FlexEditWidget [data-flexedit-row] {
+        position: relative;
+        transition: box-shadow var(--main-transition), background-color var(--main-transition);
+    }
+
+    .FlexEditWidget [data-flexedit-row].Hidden {
+        display: none;
+    }
+
+    /* Rounded hover border only on rows that can be edited. */
+    .FlexEditWidget .FlexEditableRow {
+        width: calc(100% + 12px);
+        margin: 0 -6px var(--padding-sm);
+        padding: 2px 6px 6px;
+        border: 1px solid transparent;
+        border-radius: var(--border-radius-sm);
+        cursor: pointer;
+        transition: box-shadow var(--main-transition), background-color var(--main-transition), border-color var(--main-transition);
+    }
+
+    .FlexEditWidget .FlexEditableRow:hover,
+    .FlexEditWidget .FlexEditableRow:focus-visible {
+        border-color: color-mix(in srgb, var(--primary-color) 45%, transparent);
+        outline: none;
+    }
+
+    /* --- Editable values: subtle dotted underline, stronger on hover/focus --- */
+
+    .FlexEditWidget .FlexEditable {
+        cursor: pointer;
+    }
+
+    /* Text values only. The state pill keeps --border-radius-xl from .pill. */
+    .FlexEditWidget .FlexEditable:not(.pill) {
+        border-radius: 3px;
+        text-decoration: underline dotted;
+        text-decoration-color: color-mix(in srgb, currentColor 30%, transparent);
+        text-underline-offset: 3px;
+        transition: background-color var(--main-transition), text-decoration-color var(--main-transition);
+    }
+
+    .FlexEditWidget .FlexEditable:hover,
+    .FlexEditWidget .FlexEditable:focus-visible {
+        background-color: color-mix(in srgb, var(--primary-color) 8%, transparent);
+        text-decoration-color: var(--primary-color);
+        outline: none;
+    }
+
+    /* Labels copy the value. The value text itself stays selectable. */
+    .FlexEditWidget label,
+    .FlexEditWidget .Value {
+        -webkit-user-select: text;
+        user-select: text;
+    }
+
+    /* Beat .FlexEditableRow { cursor: pointer } so the label shows the copy cursor. */
+    .FlexEditWidget .FlexEditableRow > label,
+    .FlexEditWidget [data-flexedit-row] > label {
+        cursor: pointer;
+    }
+
+    /* State stays a pill under the label. float:left on .pill must not pull it up. */
+    .FlexEditWidget span.state:not(.FlexEditEditing) {
+        display: flex;
+        flex-flow: column;
+        align-items: flex-start;
+    }
+
+    .FlexEditWidget span.state:not(.FlexEditEditing) .Value.pill {
+        float: none;
+    }
+
+    /* The state is shown as pill: no underline, use a ring instead. */
+    .FlexEditWidget .Value.pill.FlexEditable {
+        text-decoration: none;
+    }
+
+    .FlexEditWidget .Value.pill.FlexEditable:hover,
+    .FlexEditWidget .Value.pill.FlexEditable:focus-visible {
+        box-shadow: 0 0 0 2px color-mix(in srgb, var(--primary-color) 45%, transparent);
+    }
+
+    /* --- Editor --- */
+
+    .FlexEditWidget .FlexEditEditing > .Value {
+        display: none;
+    }
+
+    /* Label and undo share the first row. The selection uses the full width below. */
+    .FlexEditWidget span.FlexEditEditing {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: center;
+        column-gap: var(--gap-xs);
+    }
+
+    .FlexEditWidget .FlexEditEditing > label {
+        grid-column: 1;
+        grid-row: 1;
+    }
+
+    .FlexEditWidget .FlexEditEditing .FlexEditEditor,
+    .FlexEditWidget .FlexEditEditing .FlexEditInput {
+        display: contents;
+    }
+
+    .FlexEditWidget .FlexEditEditor {
+        display: flex;
+        flex-flow: column;
+        gap: var(--gap-sm);
+        width: 100%;
+    }
+
+    .FlexEditWidget .FlexEditInput {
+        display: flex;
+        align-items: center;
+        gap: var(--gap-sm);
+    }
+
+    /* Tree stays in the dropdown. Hide the sitemap toggle beside the field.
+       InputFields calls .show() on the link, which writes an inline display. */
+    .FlexEditWidget .FlexEditInput .ShowTreeSelection {
+        display: none !important;
+    }
+
+    .FlexEditWidget .FlexEditInput select,
+    .FlexEditWidget .FlexEditInput .InputField_Container,
+    #ticketDetails .FlexEditWidget .FlexEditInput div.InputField_InputContainer {
+        flex: 1 1 auto;
+        grid-column: 1 / -1;
+        grid-row: 2;
+        width: 100%;
+        min-width: 0;
+        max-width: none;
+    }
+
+    .FlexEditWidget .FlexEditEditing .FlexEditPending {
+        grid-column: 1 / -1;
+        grid-row: 3;
+    }
+
+    /* Ticket zoom caps sidebar modernize fields at 185px. FlexEdit uses the row width.
+       Height, font and padding stay on the standard input rules. */
+    #ticketDetails .FlexEditWidget .FlexEditInput .InputField_Search,
+    #ticketDetails .FlexEditWidget .FlexEditInput .InputField_Autocomplete {
+        width: 100%;
+        min-width: 0;
+        max-width: none;
+    }
+
+    .FlexEditWidget button.FlexEditUndo {
+        grid-column: 2;
+        grid-row: 1;
+        justify-self: end;
+        align-self: center;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 28px;
+        height: 28px;
+        padding: 0;
+        border: none;
+        border-radius: 7px;
+        background-color: transparent;
+        color: #8a8a8a;
+        cursor: pointer;
+    }
+
+    .FlexEditWidget button.FlexEditUndo i {
+        font-size: 15px;
+        line-height: 1;
+    }
+
+    .FlexEditWidget button.FlexEditUndo:hover,
+    .FlexEditWidget button.FlexEditUndo:focus-visible {
+        background-color: transparent;
+        color: #666;
+    }
+
+    .FlexEditWidget button.FlexEditUndo:focus-visible {
+        outline: 2px solid var(--flexedit-accent);
+        outline-offset: 1px;
+    }
+
+    .FlexEditWidget .FlexEditPending {
+        display: flex;
+        flex-flow: column;
+        gap: var(--gap-xs);
+        margin-top: var(--gap-xs);
+        min-width: 0;
+    }
+
+    /* Same selects as the note screen, one row. Slightly tighter padding so the sidebar fits. */
+    .FlexEditWidget .FlexEditPending .select-field-wrapper {
+        flex-wrap: nowrap;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .FlexEditWidget .FlexEditPending .select-field-wrapper select {
+        padding-left: var(--padding-xs);
+        padding-right: var(--padding-xs);
+    }
+
+    .FlexEditWidget .FlexEditPending.Hidden {
+        display: none;
+    }
+
+    /* --- Changed rows: dot on the label, accent border on the input, no box --- */
+
+    .FlexEditWidget .FlexEditChanged,
+    .FlexEditWidget .FlexEditChanged:hover,
+    .FlexEditWidget .FlexEditChanged:focus-visible {
+        border-color: transparent;
+        box-shadow: none;
+    }
+
+    .FlexEditWidget .FlexEditChanged > label::after {
+        content: "";
+        display: inline-block;
+        width: 6px;
+        height: 6px;
+        margin-left: 6px;
+        border-radius: 50%;
+        background-color: var(--flexedit-accent);
+        flex: 0 0 auto;
+    }
+
+    .FlexEditWidget .FlexEditChanged .InputField_Search,
+    .FlexEditWidget .FlexEditChanged .InputField_Search:focus,
+    .FlexEditWidget .FlexEditChanged select.FlexEditSelection {
+        border-color: var(--flexedit-accent);
+        box-shadow: none;
+    }
+
+    /* Selected-value chip sits in the middle of the field, with room before the caret. */
+    .FlexEditWidget .FlexEditInput div.InputField_Selection {
+        top: 50%;
+        height: auto;
+        max-width: calc(100% - 36px);
+        padding: 2px 8px;
+        line-height: 1.4;
+        transform: translateY(-50%);
+    }
+
+    .FlexEditWidget .FlexEditAdjusted {
+        background-color: color-mix(in srgb, var(--primary-color) 12%, transparent);
+    }
+
+    .FlexEditWidget .FlexEditError {
+        box-shadow: inset 3px 0 0 #d9534f;
+    }
+
+    .FlexEditWidget .FlexEditUpdated {
+        animation: FlexEditHighlight 1.5s ease-out;
+    }
+
+    @keyframes FlexEditHighlight {
+        from {
+            background-color: color-mix(in srgb, var(--primary-color) 18%, transparent);
+        }
+        to {
+            background-color: transparent;
+        }
+    }
+
+    /* --- Header actions (cancel, save). Hidden until a field is dirty. --- */
+
+    .FlexEditSidebarWidget > .inner .sidebarWidgetTitle::before {
+        top: 50%;
+        margin-top: -6px;
+    }
+
+    .FlexEditSidebarWidget .FlexEditHeaderActions {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        position: absolute;
+        top: 50%;
+        right: 35px;
+        z-index: 2;
+        transform: translateY(-50%);
+    }
+
+    .FlexEditSidebarWidget .FlexEditHeaderActions.Hidden {
+        display: none;
+    }
+
+    .FlexEditSidebarWidget.FlexEditDirty > .inner .sidebarWidgetTitle h3 {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-right: 120px;
+        min-height: 45px;
+    }
+
+    .FlexEditSidebarWidget .FlexEditHeaderActions button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+        margin: 0;
+        padding: 0;
+        border: 1px solid #d6d6d6;
+        border-radius: 7px;
+        background: #fff;
+        color: #666;
+        cursor: pointer;
+        line-height: 0;
+    }
+
+    .FlexEditSidebarWidget .FlexEditHeaderActions .FlexEditSaveAll {
+        color: var(--flexedit-accent);
+    }
+
+    .FlexEditSidebarWidget .FlexEditHeaderActions button:hover {
+        background: #f3f3f3;
+    }
+
+    .FlexEditSidebarWidget .FlexEditHeaderActions button:focus-visible {
+        outline: 2px solid var(--flexedit-accent);
+        outline-offset: 2px;
+    }
+
+    .FlexEditSidebarWidget .FlexEditHeaderActions svg {
+        display: block;
+        width: 16px;
+        height: 16px;
+    }
+
+    /* Sidebar modernize fields are capped (80px / 185px). FlexEdit uses the row. */
+    .mainStructure .SidebarColumn .FlexEditWidget .FlexEditInput div.InputField_InputContainer,
+    .SidebarColumn .FlexEditWidget .FlexEditInput div.InputField_InputContainer,
+    #ticketDetails .FlexEditWidget .FlexEditInput div.InputField_InputContainer {
+        width: 100%;
+        max-width: none;
+    }
+
+    .SidebarColumn .FlexEditWidget .FlexEditInput .InputField_Search,
+    .SidebarColumn .FlexEditWidget .FlexEditInput .InputField_Autocomplete {
+        width: 100%;
+        min-width: 0;
+    }
+}
+
+/* The list is appended to body, outside the widget. */
+.InputField_ListContainer.FlexEditList {
+    width: max-content;
+    min-width: 280px;
+    max-width: min(480px, 90vw);
+}
+
+.InputField_ListContainer.FlexEditList .InputField_TreeContainer {
+    min-width: 100%;
+    max-height: 320px;
+}
+
+.InputField_ListContainer.FlexEditList .jstree-anchor {
+    height: auto;
+    white-space: normal;
+}
+
+/* Tree indent and the expand arrow stay. The extra node icon does not. */
+.InputField_ListContainer.FlexEditList .jstree-themeicon {
+    display: none;
+}

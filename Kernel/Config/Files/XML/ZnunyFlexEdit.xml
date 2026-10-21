@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<otrs_config version="2.0" init="Config">
+    <Setting Name="Ticket::Frontend::AgentTicketFlexEdit###Enabled" Required="1" Valid="1">
+        <Description Translatable="1">Enables inline editing of ticket attributes in the ticket information widget of the ticket zoom screen. Agents can disable it in their personal preferences.</Description>
+        <Navigation>Frontend::Agent::View::TicketFlexEdit</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">1</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketFlexEdit###Fields" Required="1" Valid="1">
+        <Description Translatable="1">Defines which ticket attributes can be edited inline in the ticket information widget (0 = disabled, 1 = enabled).</Description>
+        <Navigation>Frontend::Agent::View::TicketFlexEdit</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Priority">1</Item>
+                <Item Key="Type">1</Item>
+                <Item Key="Queue">1</Item>
+                <Item Key="State">1</Item>
+                <Item Key="Service">1</Item>
+                <Item Key="SLA">1</Item>
+                <Item Key="Lock">1</Item>
+                <Item Key="Owner">1</Item>
+                <Item Key="Responsible">1</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketFlexEdit###Permission" Required="1" Valid="1">
+        <Description Translatable="1">Defines the ticket permission an agent needs to edit an attribute inline.</Description>
+        <Navigation>Frontend::Agent::View::TicketFlexEdit</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Priority">priority</Item>
+                <Item Key="Type">rw</Item>
+                <Item Key="Queue">move_into</Item>
+                <Item Key="State">rw</Item>
+                <Item Key="Service">rw</Item>
+                <Item Key="SLA">rw</Item>
+                <Item Key="Lock">lock</Item>
+                <Item Key="Owner">owner</Item>
+                <Item Key="Responsible">responsible</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketFlexEdit###StateType" Required="1" Valid="1">
+        <Description Translatable="1">Defines the state types that can be selected when editing the state inline.</Description>
+        <Navigation>Frontend::Agent::View::TicketFlexEdit</Navigation>
+        <Value>
+            <Array>
+                <Item>open</Item>
+                <Item>closed</Item>
+                <Item>pending reminder</Item>
+                <Item>pending auto</Item>
+            </Array>
+        </Value>
+    </Setting>
+    <Setting Name="PreferencesGroups###FlexEdit" Required="0" Valid="1">
+        <Description Translatable="1">Gives agents the possibility to disable inline editing of ticket attributes in the ticket zoom screen.</Description>
+        <Navigation>Frontend::Agent::View::Preferences</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::Preferences::Generic</Item>
+                <Item Key="PreferenceGroup">Miscellaneous</Item>
+                <Item Key="Label" Translatable="1">Inline Editing</Item>
+                <Item Key="Desc" Translatable="1">Edit ticket attributes directly in the ticket information widget of the ticket zoom screen.</Item>
+                <Item Key="Key" Translatable="1">Inline editing</Item>
+                <Item Key="Data">
+                    <Hash>
+                        <Item Key="0" Translatable="1">No</Item>
+                        <Item Key="1" Translatable="1">Yes</Item>
+                    </Hash>
+                </Item>
+                <Item Key="DataSelected">1</Item>
+                <Item Key="PrefKey">UserFlexEditEnabled</Item>
+                <Item Key="Prio">5000</Item>
+                <Item Key="Active">1</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::Module###AgentTicketFlexEdit" Required="0" Valid="1">
+        <Description Translatable="1">Frontend module registration for the inline editing of ticket attributes in the agent interface.</Description>
+        <Navigation>Frontend::Agent::ModuleRegistration</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="Group">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="GroupRo">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="Description" Translatable="1">Inline editing of ticket attributes.</Item>
+                    <Item Key="Title" Translatable="1">Inline Editing</Item>
+                    <Item Key="NavBarName">Ticket</Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+    <Setting Name="ACLKeysLevel3::Actions###100-ZnunyFlexEdit" Required="0" Valid="1">
+        <Description Translatable="1">Defines which items are available for 'Action' in third level of the ACL structure.</Description>
+        <Navigation>Core::Ticket::ACL</Navigation>
+        <Value>
+            <Array>
+                <Item>AgentTicketFlexEdit</Item>
+            </Array>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketZoom###Widgets###0100-TicketInformation" Required="0" Valid="1">
+        <Description Translatable="1">AgentTicketZoom widget that displays ticket data in the side bar.</Description>
+        <Navigation>Frontend::Agent::View::TicketZoom</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::TicketZoom::TicketInformationFlexEdit</Item>
+                <Item Key="Location">Sidebar</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Loader::Module::AgentTicketZoom###100-ZnunyFlexEdit" Required="0" Valid="1">
+        <Description Translatable="1">Loader module registration for the inline editing of ticket attributes in the ticket zoom screen.</Description>
+        <Navigation>Frontend::Agent::ModuleRegistration::Loader</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="CSS">
+                    <Array>
+                        <Item>Core.Agent.TicketZoom.FlexEdit.css</Item>
+                    </Array>
+                </Item>
+                <Item Key="JavaScript">
+                    <Array>
+                        <Item>Core.Agent.TicketZoom.FlexEdit.js</Item>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+</otrs_config>

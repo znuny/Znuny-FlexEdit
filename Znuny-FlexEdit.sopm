@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<otrs_package version="1.0">
+    <Name>Znuny-FlexEdit</Name>
+    <Version>7.3.1</Version>
+    <Framework>7.3.x</Framework>
+    <Vendor>Znuny GmbH</Vendor>
+    <URL>http://znuny.com/</URL>
+    <License>GNU AFFERO GENERAL PUBLIC LICENSE Version 3, November 2007</License>
+    <Description Lang="de">Inline-Bearbeitung von Ticket-Attributen im Widget Ticket-Information der Ticket-Zoom-Ansicht.</Description>
+    <Description Lang="en">Inline editing of ticket attributes in the ticket information widget of the ticket zoom screen.</Description>
+    <ChangeLog Version="7.3.1" Date="2026-09-29 16:00:00 +0200">Initial release for Znuny 7.3.</ChangeLog>
+    <Filelist>
+        <File Permission="660" Location="doc/de/feature.md"/>
+        <File Permission="660" Location="doc/en/feature.md"/>
+        <File Permission="660" Location="Kernel/Config/Files/XML/ZnunyFlexEdit.xml"/>
+        <File Permission="660" Location="Kernel/Language/de_ZnunyFlexEdit.pm"/>
+        <File Permission="660" Location="Kernel/Modules/AgentTicketFlexEdit.pm"/>
+        <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/AgentTicketFlexEdit.tt"/>
+        <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformationFlexEdit.tt"/>
+        <File Permission="660" Location="Kernel/Output/HTML/TicketZoom/TicketInformationFlexEdit.pm"/>
+        <File Permission="660" Location="Kernel/System/FlexEdit.pm"/>
+        <File Permission="660" Location="Kernel/System/FlexEdit/Ticket/Base.pm"/>
+        <File Permission="660" Location="Kernel/System/FlexEdit/Ticket/Base/Service.pm"/>
+        <File Permission="660" Location="Kernel/System/FlexEdit/Ticket/Base/User.pm"/>
+        <File Permission="660" Location="Kernel/System/FlexEdit/Ticket/Lock.pm"/>
+        <File Permission="660" Location="Kernel/System/FlexEdit/Ticket/Owner.pm"/>
+        <File Permission="660" Location="Kernel/System/FlexEdit/Ticket/Priority.pm"/>
+        <File Permission="660" Location="Kernel/System/FlexEdit/Ticket/Queue.pm"/>
+        <File Permission="660" Location="Kernel/System/FlexEdit/Ticket/Responsible.pm"/>
+        <File Permission="660" Location="Kernel/System/FlexEdit/Ticket/SLA.pm"/>
+        <File Permission="660" Location="Kernel/System/FlexEdit/Ticket/Service.pm"/>
+        <File Permission="660" Location="Kernel/System/FlexEdit/Ticket/State.pm"/>
+        <File Permission="660" Location="Kernel/System/FlexEdit/Ticket/Type.pm"/>
+        <File Permission="660" Location="scripts/test/ZnunyFlexEdit.t"/>
+        <File Permission="660" Location="var/httpd/htdocs/js/Core.Agent.TicketZoom.FlexEdit.js"/>
+        <File Permission="660" Location="var/httpd/htdocs/skins/Agent/default/css/Core.Agent.TicketZoom.FlexEdit.css"/>
+    </Filelist>
+</otrs_package>
