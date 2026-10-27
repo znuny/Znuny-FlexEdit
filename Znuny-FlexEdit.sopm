@@ -10,8 +10,6 @@
     <Description Lang="en">Inline editing of ticket attributes in the ticket information widget of the ticket zoom screen.</Description>
     <ChangeLog Version="7.3.1" Date="2026-09-29 16:00:00 +0200">Initial release for Znuny 7.3.</ChangeLog>
     <Filelist>
-        <File Permission="660" Location="doc/de/feature.md"/>
-        <File Permission="660" Location="doc/en/feature.md"/>
         <File Permission="660" Location="Kernel/Config/Files/XML/ZnunyFlexEdit.xml"/>
         <File Permission="660" Location="Kernel/Language/de_ZnunyFlexEdit.pm"/>
         <File Permission="660" Location="Kernel/Modules/AgentTicketFlexEdit.pm"/>
