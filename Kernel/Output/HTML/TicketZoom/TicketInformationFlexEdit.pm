@@ -2,7 +2,7 @@
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # Copyright (C) 2012 Znuny GmbH, https://znuny.com/
 # --
-# $origin: znuny - 29c529b1abd3e3daf89ab4b894bfce3822beef88 - Kernel/Output/HTML/TicketZoom/TicketInformation.pm
+# $origin: znuny - dba774b5a33a89eba3abad7c7620f9baa40a9d2c - Kernel/Output/HTML/TicketZoom/TicketInformation.pm
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -150,7 +150,6 @@ sub Run {
 #         }
 #     }
 
-    # Show service/SLA rows also if empty, as long as they are editable inline.
     if ( $ConfigObject->Get('Ticket::Service') && ( $Ticket{Service} || $FlexEditFields{Service} ) ) {
 
         my %Service = ( ValidID => 1 );
@@ -484,11 +483,12 @@ sub Run {
     }
 
     my $Output = $LayoutObject->Output(
-        TemplateFile => 'AgentTicketZoom/TicketInformationFlexEdit',
 # ---
 # Znuny-FlexEdit
 # ---
-#         Data         => { %Param, %Ticket, %AclAction },
+        # TemplateFile => 'AgentTicketZoom/TicketInformation',
+        # Data         => { %Param, %Ticket, %AclAction },
+        TemplateFile => 'AgentTicketZoom/TicketInformationFlexEdit',
         Data => { %Param, %Ticket, %AclAction, %FlexEdit },
 # ---
     );

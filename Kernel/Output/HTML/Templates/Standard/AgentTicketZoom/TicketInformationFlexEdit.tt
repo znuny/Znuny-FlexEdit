@@ -2,7 +2,7 @@
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # Copyright (C) 2012 Znuny GmbH, https://znuny.com/
 # --
-# $origin: znuny - 29c529b1abd3e3daf89ab4b894bfce3822beef88 - Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
+# $origin: znuny - 3b483a60cda9a4958fd5063a6b0a525fabbab607 - Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you

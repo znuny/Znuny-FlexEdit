@@ -20,7 +20,7 @@ Agents can change type, state, lock, priority, queue, service, SLA, owner, and r
 
 **Prerequisites**
 
-- Znuny 7.3
+- Znuny 7.5
 
 **Installation**
 
