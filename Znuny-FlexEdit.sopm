@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <package version="1.0">
     <Name>Znuny-FlexEdit</Name>
-    <Version>7.3.1</Version>
+    <Version>7.5.1</Version>
     <Framework>7.5.x</Framework>
     <Vendor>Znuny GmbH</Vendor>
     <URL>http://znuny.com/</URL>
     <License>GNU AFFERO GENERAL PUBLIC LICENSE Version 3, November 2007</License>
     <Description Lang="de">Inline-Bearbeitung von Ticket-Attributen im Widget Ticket-Information der Ticket-Zoom-Ansicht.</Description>
     <Description Lang="en">Inline editing of ticket attributes in the ticket information widget of the ticket zoom screen.</Description>
+    <ChangeLog Version="7.5.1" Date="2026-11-13 09:24:51 +0100">Initial release for Znuny 7.5.</ChangeLog>
     <ChangeLog Version="7.3.1" Date="2026-09-29 16:00:00 +0200">Initial release for Znuny 7.3.</ChangeLog>
     <Filelist>
         <File Permission="660" Location="Kernel/Config/Files/XML/ZnunyFlexEdit.xml"/>
