@@ -8,6 +8,7 @@
     <License>GNU AFFERO GENERAL PUBLIC LICENSE Version 3, November 2007</License>
     <Description Lang="de">Inline-Bearbeitung von Ticket-Attributen im Widget Ticket-Information der Ticket-Zoom-Ansicht.</Description>
     <Description Lang="en">Inline editing of ticket attributes in the ticket information widget of the ticket zoom screen.</Description>
+    <ChangeLog Version="7.3.1" Date="2026-11-13 09:25:07 +0100">Initial release for Znuny 7.3.</ChangeLog>
     <ChangeLog Version="7.3.1" Date="2026-09-29 16:00:00 +0200">Initial release for Znuny 7.3.</ChangeLog>
     <Filelist>
         <File Permission="660" Location="Kernel/Config/Files/XML/ZnunyFlexEdit.xml"/>
